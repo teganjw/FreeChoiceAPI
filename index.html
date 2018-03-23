@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Free Choice API</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div id = "all">
+<h1 id = "h1">Trivia</h1>
+    <table id = some cellpadding="50" cellspacing="50">
+        <tr><td>
+            Number of Questions:
+            <input type="number" id="numQuestions" value="10" size="25">
+        </tr></td>
+        <tr><td>
+            Select Category:
+            <select id="selectCategory">
+                <option value="">Any Category</option>
+                <option value="9">General Knowledge</option>
+                <option value="20">Mythology</option>
+                <option value="21">Sports</option>
+                <option value="27">Animals</option>
+                <option value="22">Geography</option>
+                <option value="26">Celebrities</option>
+                <option value="11">Entertainment: Film</option>
+                <option value="12">Entertainment: Music</option>
+                <option value="10">Entertainment: Books</option>
+                <option value="14">Entertainment: Television</option>
+            </select>
+        </tr></td>
+        <tr><td>
+            Select Difficulty:
+            <select id="selectDifficulty">
+                <option value="">Any Difficulty</option>
+                <option value="easy">easy</option>
+                <option value="medium">medium</option>
+                <option value="hard">hard</option>
+            </select>
+            </td></tr>
+        <tr><td>
+            Select Type
+            <select id="selectType">
+                <option value="">Any Type</option>
+                <option value="multiple">Multiple Choice</option>
+                <option value="boolean">True/False</option>
+            </select>
+        </tr></td>
+
+        <tr><td>
+            <button id="myButton">Submit</button>
+        </tr></td>
+
+    </table>
+</div>
+
+<div id = "answers"></div>
+<button id = "grade"> Grade </button>
+
+
+<h2><div id = "display"></div></h2>
+<h3><div id = "message"></div></h3>
+
+
+<button id="startOver">Start Over</button>
+</body>
+</html>

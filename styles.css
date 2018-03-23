@@ -1,0 +1,44 @@
+h1{
+    text-align: center;
+    color: red;
+}
+#all{
+    margin: 50px;
+}
+#some{
+    text-align: center;
+    margin:auto;
+    width: 50%;
+
+}
+#answers{
+    display: block;
+    width: 50%;
+    margin:auto;
+}
+#grade{
+    display:none;
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+h3{
+    text-align: center;
+}
+#startOver{
+    display: none;
+    text-align: center;
+}
+#numQuestions{
+    text-align: center;
+}
+#selectCategory{
+    text-align: center;
+}
+#selectDifficulty{
+    text-align: center;
+}
+#selectType{
+    align-items:center;
+}
