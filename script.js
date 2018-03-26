@@ -25,6 +25,7 @@ $(document).ready(function () {
         });
 
     });
+
     $('#grade').on('click', function(){
         document.getElementById("numQuestions").value = 10;
         document.getElementById("selectCategory").value = "";
@@ -32,6 +33,7 @@ $(document).ready(function () {
         document.getElementById("selectType").value = "";
         document.getElementById("display").style.display = 'inline';
         document.getElementById("message").style.display = 'inline';
+        document.getElementById("table").style.display = 'inline';
         document.getElementById("answers").style.display = 'none';
         document.getElementById("grade").style.display = 'none';
 
@@ -40,12 +42,30 @@ $(document).ready(function () {
             guessedAnswers.push($('input[name=q' + i + ']:checked').val())
         }
         console.log(guessedAnswers);
+
+        var s = "<table border = '1'>";
+        s+="What you got wrong:"
+        s+= ("<tr><td>" + 'Question' + "</td>");
+        s+= ("<td>" + 'Your Answer' + "</td>");
+        s+= ("<td>" + 'Correct Answer' + "</td></tr>");
         var numCorrect = 0;
         for(var c=0; c<correctAnswers.length; c++){
             if(correctAnswers[c] == guessedAnswers[c]){
                 numCorrect++
+            }else{
+                s+= ("<tr><td>" + trivia[c] + "</td>");
+                if(guessedAnswers[c] == undefined){
+                    s+= ("<td>" + "unanswered" + "</td>");
+                }else{
+                    s+= ("<td>" + guessedAnswers[c] + "</td>");
+                }
+                s+= ("<td>" + correctAnswers[c] + "</td></tr>");
             }
         }
+
+        s += "</table>";
+        document.getElementById("table").innerHTML = s;
+
         console.log(numCorrect);
         document.getElementById("display").innerHTML = "You got a " + numCorrect + "/10! That's a " + numCorrect/10 * 100 + "%";
         if((numCorrect)>=8){
@@ -63,6 +83,8 @@ $(document).ready(function () {
 
     $('#startOver').on('click', function () {
         correctAnswers = [];
+        trivia = [];
+        document.getElementById("table").style.display = 'none';
         document.getElementById("display").style.display = 'none';
         document.getElementById("message").style.display = 'none';
         document.getElementById("startOver").style.display = 'none';
@@ -91,11 +113,27 @@ function shuffle(array) {
     console.log(array)
 }
 
+//stack overflow
+function decodeHTMLEntities (str) {
+    var element = document.createElement('div');
+    if(str && typeof str === 'string') {
+        // strip script/html tags
+        str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+        str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+        element.innerHTML = str;
+        str = element.textContent;
+        element.textContent = '';
+    }
+
+    return str;
+}
+
+
 var correctAnswers = [];
+var trivia = [];
 function myFunction(json){
     document.getElementById("all").style.display = 'none';
     var results = json.results;
-    var trivia = [];
     var answers = [];
 
     for(var i=0; i<results.length; i++) {
@@ -103,6 +141,8 @@ function myFunction(json){
         for (var a = 0; a < results[i].incorrect_answers.length; a++) {
             sAnswers.push(results[i].incorrect_answers[a]);
         }
+
+        results[i].correct_answer = decodeHTMLEntities(results[i].correct_answer);
         correctAnswers.push(results[i].correct_answer);
         sAnswers.push(results[i].correct_answer);
         sAnswers = shuffle(sAnswers);
